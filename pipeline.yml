@@ -1,0 +1,22 @@
+name: spring-cloud
+stages:
+- name: clone
+  steps:
+  - sourceCodeConfig:
+      branch: master
+      branchCondition: only
+      sourceCodeCredentialId: user-qhsqw:c-xgxzt-github-ljohn001
+      url: https://github.com/Ljohn001/LjohnPrj.git
+- name: build
+  steps:
+  - runScriptConfig:
+      image: ubuntu:ssh
+      isShell: true
+      shellScript: ls
+- name: publish
+  steps:
+  - publishImageConfig:
+      buildContext: .
+      dockerfilePath: ./Dockerfile
+      tag: dockerrepos.vphotos.cn/vphoto/nginx:${CICD_EXECUTION_SEQUENCE}
+triggerWebhookPush: true
